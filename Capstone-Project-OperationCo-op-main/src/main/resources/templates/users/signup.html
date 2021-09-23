@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Sign Up</title>
+    <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <link th:replace="partials/links :: links"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("./img/login.gif")!important;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .signUp {
+            margin-bottom: 30px;
+            padding: 100px;
+            /*margin-top: 5%;*/
+        }
+
+        input[type=text], input[type=password] {
+            width: 100%;
+            padding: 6px 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 20px;
+            float: top;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 6px 10px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 20px;
+            float: top;
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .stretch {
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="row">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center">
+            <form class="signUp" th:action="@{/sign-up}" method="POST" th:object="${user}">
+                <div class="container">
+                    <div class="card border-glow">
+                        <div class="card-body">
+                            <h2 style="text-align: center">Sign Up</h2>
+                            <p style="text-align: center">Please fill in this form to create an account.</p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label for="name"><b>Name</b></label>
+                                    <input id="name" type="text" placeholder="Enter your name" name="name"
+                                           th:field="*{fullName}" required>
+                                </div>
+                                <div class="col-4">
+                                    <label for="username"><b>Username</b></label>
+
+                                    <input id="username" type="text" placeholder="Enter your Username" name="username"
+                                           th:field="*{userName}" required>
+<!--                                    adding validation  -->
+                                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{userName}"></p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="form-group">
+                                        <label for="pronouns"><b>Pronouns</b></label>
+                                        <select class="form-control" id="pronouns" th:field="*{pronouns}"
+                                                style="border-radius: 20px">
+                                            <optgroup label="Pronouns">
+                                                <option value="he/him">He/Him</option>
+                                                <option value="she/her">She/Her</option>
+                                                <option value="they/them">They/Them</option>
+                                                <option value="xe/xem">Xe/Xem</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="email"><b>Email</b></label>
+
+<!--                                    <input id="email" type="text" placeholder="Enter your name" name="email"-->
+
+                                    <input id="email" type="text" placeholder="Enter your email" name="email" th:field="*{email}"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="DOB"><b>Date Of Birth</b></label>
+                                    <input id="DOB" type="text" placeholder="MM/DD/YYYY" th:field="*{birthDate}"
+                                           name="DOB"
+                                           required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="password"><b>Password</b></label>
+                                    <input id="password" type="password" placeholder="Enter Password" name="password"
+                                           th:field="*{password}" required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="confirmPassword"><b>Repeat Password</b></label>
+                                    <input id="confirmPassword" type="password" placeholder="Confirm Password"
+                                           name="confirmPassword" required>
+                                </div>
+                            </div>
+
+                            <button class="btn stretch" type="submit" value="Sign me up!">Register</button>
+
+                            <div class="d-flex justify-content-center">
+                                <a class="stretch btn" th:href="@{/login}">Already A User? Sign In!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>
+
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Error page</title>
+    <script src="https://kit.fontawesome.com/4b9ba14b0f.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #98d9f5;
+            font-family: 'Nunito Sans', sans-serif;
+        }
+
+        .mainbox {
+            margin: auto;
+            height: 600px;
+            width: 600px;
+            position: relative;
+        }
+
+        .err {
+            color: #ffffff;
+            font-size: 11rem;
+            position: absolute;
+            left: 20%;
+            top: 8%;
+        }
+
+        #second {
+            color: #ffffff;
+            font-size: 8.5rem;
+            position: absolute;
+            left: 70%;
+            top: 13%;
+        }
+
+        .far {
+            position: absolute;
+            font-size: 8.5rem;
+            left: 42%;
+            top: 13%;
+            color: #ffffff;
+        }
+
+        .msg {
+            text-align: center;
+            font-size: 1.6rem;
+            position: absolute;
+            left: 16%;
+            top: 45%;
+            width: 75%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainbox">
+    <div class="err">5</div>
+    <i class="far fa-question-circle fa-spin"></i>
+    <i id="second" class="far fa-question-circle fa-spin"></i>
+    <div class="msg">
+        <p>Ruh-roh, something just isn't right... Time to paw through your logs and get down and dirty in your
+            stack-trace;)</p>
+    </div>
+</div>
+</body>
+</html>

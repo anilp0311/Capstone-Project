@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search for Users</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<h1>This is the Search Results for Users Page</h1>
+
+<div th:each="user: ${users}">
+    <h2 th:text="${user.fullName}"></h2>
+<!--    <h2 th:text="${user.user_name}"></h2>-->
+    <form th:action="@{/user/search}" method="GET">
+        <button type="submit">Search User</button>
+    </form>
+
+</div>
+
+</body>
+</html>

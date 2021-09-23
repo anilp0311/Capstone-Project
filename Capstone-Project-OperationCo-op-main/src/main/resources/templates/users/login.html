@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Log In</title>
+    <link th:replace="partials/links :: links"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+
+        html,body {
+            height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("./img/login.gif") !important;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .login {
+            margin-bottom: 30px;
+            padding: 100px;
+            /*margin-top: 10%;*/
+        }
+
+        .container {
+            padding: 16px;
+        }
+
+        .stretch {
+            width: 100%;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- We can set parameters to inform us whether or not the user has logged out, entered incorrect credentials, etc -->
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="row">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-center">
+
+            <!-- We can set parameters to inform us whether or not the user has logged out, entered incorrect credentials, etc -->
+
+        <div class="alert alert-danger " role="alert" th:if="${param.error}" >
+            Invalid Username and/or Password.
+        </div>
+
+        <div class="alert alert-info" role="alert" th:if="${param.logout}">
+          You have been logged out.
+        </div>
+        </div>
+
+            <form th:action="@{/login}" method="post" class="login">
+                <div class="container">
+                    <div class="card border-glow">
+                        <div class="card-body">
+                            <h2 style="text-align:center"><strong>Welcome Back</strong></h2>
+                            <hr>
+                            <label for="username"><b>Username</b></label>
+                            <input id="username" type="text" placeholder="Enter Username" name="username" required>
+                            <label for="password"><b>Password</b></label>
+                            <input id="password" type="password" placeholder="Enter Password" name="password" required>
+                            <div th:if="${param.error}">
+                                Invalid Username and/or Password.
+                            </div>
+                            <div th:if="${param.logout}">
+                                You have been logged out.
+                            </div>
+                            <button class="btn stretch" type="submit">Login</button>
+                            <a class="btn pull-right stretch" th:href="@{/sign-up}">Not A User? Sign Up!</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>
+

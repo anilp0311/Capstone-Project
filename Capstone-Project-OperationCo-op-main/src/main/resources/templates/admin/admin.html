@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Control Room</title>
+    <link th:replace="partials/links :: links"/>
+<!--    <link th:href="@{/css/style.css}" rel="stylesheet"/>-->
+
+</head>
+<body>
+<h1 class="admin"> Welcome Admin dashboard</h1>
+<br>
+<h3 class="center-align">LIST OF USER'S REGISTERED</h3>
+<div class="user-list" th:each="user : ${users}">
+    <div><p class="bold-font ">User ID: <span th:text="${user.id}">ID</span></p>
+
+        <form th:action="@{/admin/delete}" method="post">
+            <input type="hidden" name="userId" th:value="${user.id}">
+            <button value="button" type="submit">Delete</button>
+        </form>
+
+    </div>
+    <p class="bold-font ">Username: <a th:href="@{/users/profile/${user.userName}}"><span
+            th:text="${user.userName}"></span></a>
+    </p>
+
+    <!--    for print out all the -->
+    <!--             model.addAttribute("users", usersDao.findAll());-->
+    <!--            model.addAttribute("groups", groupsDao.findAll());-->
+    <!--            model.addAttribute("games", gamesDao.count());-->
+
+</div>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>

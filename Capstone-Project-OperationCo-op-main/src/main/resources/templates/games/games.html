@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <link th:replace="partials/links :: links"/>
+    <link rel="stylesheet" th:href="@{/css/games.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+
+<!--    <link rel="stylesheet" th:href="@{/css/games.css}">-->
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <meta charset="UTF-8">
+    <title>View games</title>
+
+</head>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<body>
+<h3> Games </h3>
+
+<div class="container">
+
+<div class="container mt-5">
+
+    <div class="row" id="store-list">
+        <div class="card col col-md-6 col-xs-12 card-area game-card border-glow" th:each="game: ${games}">
+            <div class="card-body">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-5 img-box">
+
+                                <img th:src="${game.art_cover}" style="max-width: 100%">
+
+                                <!--                            <a href="#"></a>-->
+                            </div>
+                            <div class="col-sm-7 card-info">
+                                <h4 class="title-store">
+                                    <strong><a href="#" th:text="${game.title}"></a></strong>
+                                </h4>
+                                <hr>
+                                <!--                            <p th:text="${game.description}"></p>-->
+                                <p>Critics Rating: <a href="#" th:text="${game.critics_rating}"
+                                                      class="btn btn-default pull-right" disabled=""
+                                                      data-original-title="" title=""></a>
+                                <form th:action="@{'/users/favorite'}" th:method="post">
+                                    <input type="hidden" th:value="${game.id}" name="gameId">
+                                    <button class="btn btn-primary pull-right fav-button" type="submit">Add To
+                                        Favorites
+                                    </button>
+                                </form>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--<footer th:replace="partials/footer :: footer"></footer>-->
+    <scripts th:replace="partials/scripts :: scripts"></scripts>
+    <!--<script th:src="@{/js/game.js}"></script>-->
+    <script th:src="@{/js/gamekeys.js}"></script>
+<!--    <script src="/static/js/gamekeys.js"></script>-->
+</body>
+</html>

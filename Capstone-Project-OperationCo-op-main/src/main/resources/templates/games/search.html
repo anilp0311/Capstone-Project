@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Page for Games</title>
+    <link th:replace="partials/links :: links"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .container {
+            margin-top: 10em;
+        }
+    </style>
+
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="container">
+    <div class="row" id="store-list">
+        <div class="col-md-5 col-sm-12 col-xs-12 card-area m-1 shadow-lg p-2 mb-4 bg-white rounded" th:each="game: ${games}">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-5 img-box">
+                            <img th:src="${game.art_cover}">
+                            <!--                            <a href="#"></a>-->
+                        </div>
+                        <div class="col-sm-7 card-info">
+                            <h4 class="title-store">
+                                <strong><a href="#" th:text="${game.title}"></a></strong>
+                            </h4>
+                            <hr>
+                            <!--                            <p th:text="${game.description}"></p>-->
+                            <p>Critics Rating: <a href="#" th:text="${game.critics_rating}" class="btn btn-default pull-right" disabled="" data-original-title="" title=""></a>
+                            <form th:action="@{'/users/favorite'}" th:method="post">
+                                <input type="hidden" th:value="${game.id}" name="gameId">
+                                <button class="btn btn-primary pull-right fav-button" type="submit">Add To Favorites</button>
+                            </form>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<footer th:replace="partials/footer :: footer"></footer>-->
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+<script th:src="@{/js/gamekeys.js}"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:replace="partials/links :: links"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+        .create {
+            display: flex;
+            margin-top: 60px;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<div class="container">
+    <div class="create">
+        <h2 id="head" class="text-center mr-5">Welcome to the Groups Page!</h2>
+        <form style="display: inline" th:action="@{'/groups/create/'}">
+            <button class="btn btn-primary pull-right fav-button">Create A Group</button>
+        </form>
+    </div>
+
+    <div class="row" id="store-list">
+        <div class="card col col-md-6 col-xs-12 card-area game-card border-glow" th:each="group : ${groups}">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 img-box">
+
+
+                            <!--                                Conditional Default Profile -->
+
+                            <img th:src="${group.getProfilePic()}" style="width:250px;height:250px; object-fit:cover"/>
+                            <!--                            <a href="#"></a>-->
+                        </div>
+                        <div class="col-sm-6 card-info pull-right">
+                            <h4 class="title-group">
+                                <strong><a th:href="'/groups/profile/' + ${group.id}" th:text="${group.name}"></a></strong>
+                            </h4>
+                            <hr>
+                            <!--                            <p th:text="${game.description}"></p>-->
+                            <!--                            <p>Description: <a href="#" th:text="${group.description}" class="btn btn-default pull-right" disabled="" data-original-title="" title=""></a>-->
+                            <!--                                            <form th:action="@{'/groups/profile' }" th:method="get">-->
+                            <!--                                                <input type="hidden" th:value="${group.id}" name="groupId">-->
+                            <!--                                                <button class="btn btn-primary pull-right fav-button" type="submit" a th:href="'/groups/profile/' + ${group.id}">View Group</button>-->
+                            <!--                                            </form>-->
+
+                            <button class="btn btn-primary pull-right fav-button"><a th:href="'/groups/profile/' + ${group.id}">View Group</a></button>
+
+<!--                            <button class="btn btn-primary pull-right fav-button"><a-->
+<!--                                    th:href="'/groups/profile/' + ${group.id}">View Group</a></button>-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>

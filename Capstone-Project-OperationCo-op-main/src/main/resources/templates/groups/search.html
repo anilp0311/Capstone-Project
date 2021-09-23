@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search for Groups</title>
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<h1>This is the Search Results for Groups Page</h1>
+
+<div th:each="group: ${groups}">
+    <h2 th:text="${group.name}"></h2>
+    <h2 th:text="${group.description}"></h2>
+    <form th:action="@{/groups/search}" method="GET">
+        <button type="submit">View Profile</button>
+    </form>
+
+</div>
+
+</body>
+</html>
+
+
+<!--STRETCH GOAL-->

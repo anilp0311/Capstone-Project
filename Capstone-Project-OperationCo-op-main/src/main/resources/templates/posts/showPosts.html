@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show All Posts</title>
+    <link th:replace="partials/links :: links"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        body {
+            /*background-image: url("https://images.pexels.com/photos/3043424/pexels-photo-3043424.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");*/
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .postcard {
+            width: 100%;
+            height: auto;
+        }
+
+        .time, .icons, .icons1 {
+            padding-left: 2em;
+        }
+
+        #postheader {
+            color: rgb(197, 198, 200);
+        }
+
+
+    </style>
+</head>
+<nav th:replace="partials/navbar :: navbar"></nav>
+
+<div class="main">
+    <main class="container">
+        <h1 style="margin-top: 5%; margin-bottom: 5%;" id="postheader"> Message Board </h1>
+
+        <div class="texts">
+            <div class="row">
+                <div class="col-12">
+                    <show_post th:if="${posts}">
+                        <div class="mx-2" th:each="item : ${posts}">
+                            <div class="row">
+                                <div class="col-1 text-center">
+                                    <div class="row d-flex justify-content-center">
+                                    <img th:src="${item.getUser().getProfilePic()}"
+                                         style="width:5em;height:5em; border-radius:50px; margin-bottom: 15px; object-fit:cover">
+                                    </div>
+
+                                    <div class="row">
+                                    <a class="col-6 align-content-center" th:href="'/groups/posts/delete/'+ ${item.id}">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                    <a class="col-6 align-content-center" th:href="'/groups/posts/edit/'+ ${item.id}">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    </div>
+                                </div>
+
+                                <div class="col-11">
+                                    <h6 th:text="${item.getUser().getUserName()}"></h6>
+                                    <p th:text="${item.message_body}"></p>
+                                    <p class="time"></p>
+                                    <p th:text="${#dates.format(item.getDate(), 'dd-MMM-yyyy HH:MM')}" class="pull-right"></p>
+                                </div>
+                            </div>
+                            <hr>
+                        </div>
+                    </show_post>
+                </div>
+            </div>
+        </div>
+
+        <form th:action="@{/groups/posts/{group_id}/submit(group_id=${group_id})}" th:method="post"
+              th:object="${post}" class="form-group" style="display:flex;">
+            <input type="text" style="width:100%;margin-right:20px" th:field="*{message_body}"
+                   class="form-control"
+                   placeholder="start typing!"/>
+            <button type="submit" class="btn btn-primary">Post Message</button>
+        </form>
+
+    </main>
+</div>
+<!--<footer th:replace="partials/footer :: footer"></footer>-->
+<!--=======-->
+<!--        <h1 style="margin-top: 10%" id="postheader"> Welcome to <span th:text="${group.name}"></span>'s Chatting dashboard </h1>-->
+
+<!--        <div class="texts">-->
+<!--            <div class="row">-->
+<!--                <show_post th:if="${posts}">-->
+
+<!--                    <div class="postcard">-->
+<!--                        <div class="mx-2" th:each="item : ${posts}">-->
+<!--                            <div class="mx-auto d-flex">-->
+<!--                                <img th:src="${item.getUser().getProfilePic()}"-->
+<!--                                     style="width:5em;height:5em; object-fit:cover">-->
+<!--                                <div style="flex-grow: 1"-->
+<!--                                     class="d-flex flex-column justify-content-center align-items-center">-->
+<!--                                    <p th:text=" 'By: '+ ${item.getUser().getUserName()}"></p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+
+<!--                            &lt;!&ndash;            <div style="display: inline-flex; align-items: center">&ndash;&gt;-->
+<!--                            <div class="part1 d-flex justify-content-start">-->
+<!--                                <h5 th:text="${item.message_body}"></h5> <a class="icons"-->
+<!--                                                                            th:href="'/groups/posts/delete/'+ ${item.id}"><i-->
+<!--                                    class="fas fa-trash-alt"></i></a>-->
+<!--                                <a class="icons1" th:href="'/groups/posts/edit/'+ ${item.id}"><i-->
+<!--                                        class="fas fa-edit"></i></a>-->
+<!--                            </div>-->
+
+<!--                            <p class="part2 d-flex justify-content-start">-->
+<!--                            <p class="time"></p>-->
+<!--                            <p th:text="${#dates.format(item.getDate(), 'dd-MMM-yyyy')}"></p>-->
+<!--                            <hr>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </show_post>-->
+<!--            </div>-->
+<!--            <form th:action="@{/groups/posts/{group_id}/submit(group_id=${group_id})}" th:method="post"-->
+<!--                  th:object="${post}" class="form-group" style="display:flex;">-->
+<!--                <input type="text" style="width:100%;margin-right:20px" th:field="*{message_body}"-->
+<!--                       class="form-control"-->
+<!--                       placeholder="start typing!"/>-->
+<!--                <button type="submit" class="btn btn-primary">Post Message</button>-->
+<!--            </form>-->
+
+<!--        </div>-->
+<!--    </main>-->
+<!--</div>-->
+>>>>>>> f6ead84b1aa9042b36b731d784c9188387afbdce
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>
+
+

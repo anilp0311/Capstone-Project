@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <link th:replace="partials/links :: links"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-image: url("./img/create.gif")!important;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .container {
+            margin-top: 75px;
+        }
+    </style>
+    <title>Create Your Squad</title>
+</head>
+<nav th:insert="partials/navbar :: navbar"></nav>
+<body>
+
+
+<!--<header th:replace="partials/head :: head"></header>-->
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="container">
+            <div class="card border-glow">
+                <div class="card-body">
+                    <h1 class="text-center">Create your Squad!</h1>
+                    <form th:action="@{/groups/create}" method="POST" th:object="${group}">
+                        <div class="form-group">
+                            <label for="name">Squad Name</label>
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}"
+                                   placeholder="enter squad name"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Squad Description</label>
+                            <input type="text" class="form-control" id="description" name="description"
+                                   th:field="*{description}"
+                                   placeholder="enter squad description"/>
+                        </div>
+
+                        <!--                    <input id="description" type="text" th:field="*{description}"/>-->
+
+                        <div class="tags">
+                            <h4 style="margin-top:2.5rem; margin-bottom:0.8rem">What's Your Squad All About?</h4>
+                            <th:block th:each="tag : ${tagsList}">
+                                <div class="form-check form-check-inline m-2">
+                                    <input class="form-check-input" type="checkbox"
+                                           th:id="${tag.name}" name="tags" th:value="${tag.id}"/>
+                                    <label class="form-check-label" th:for="${tag.name}"
+                                           th:text="${tag.name}"></label>
+                                </div>
+                            </th:block>
+
+                            <br/>
+                        </div>
+                            <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--<footer th:replace="partials/footer :: footer"></footer>-->
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:src="@{/js/keys.js}"></script>
+<script th:src="@{/js/filestack.js}"></script>
+<script th:src="@{/js/userProfile.js}"></script>
+</body>
+</html>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+</body>
+</html>

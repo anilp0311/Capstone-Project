@@ -1,0 +1,139 @@
+html {
+    background: #01131a;
+
+
+
+
+}
+body {
+    background: radial-gradient(#011822 0%, #01131a 78%);
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    overflow-x: hidden;
+
+
+
+}
+h1{
+    font-family: 'Goldman', cursive;
+}
+p, button{
+    font-family: 'Jura', sans-serif;
+
+
+}
+/*Login button for home page*/
+#hlogin{
+    font-family: 'Jura', sans-serif;
+}
+
+.border-glow {
+    border: 1px solid #98D9F5;
+    box-shadow: 0px 0px 15px #98D9F5;
+    background: #181628;
+    color: rgb(197,198,200);
+}
+
+.btn {
+    background: #032f41;
+    color: #98d9f5;
+    box-shadow: 0px 0px 5px;
+    border-style: solid;
+    border-color: #98d9f5;
+    border-radius: 150px;
+    font-family: 'Jura', sans-serif;
+}
+
+.btn:hover {
+    background: #98d9f5;
+    color: #032f41;
+    box-shadow: 0px 0px 5px #011822;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #032f41;
+    border-radius: 150px;
+    font-family: 'Jura', sans-serif;
+}
+
+.pill {
+    display: inline-block;
+    background: #032f41;
+    color: #98d9f5;
+    box-shadow: 0px 0px 1px;
+    border-style: solid;
+    border-color: #98d9f5;
+    font-size: .875rem;
+    line-height: 1.5;
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+    float: top;
+    text-align: center;
+    font-family: 'Jura', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Goldman', cursive;
+    color: #98d9f5;
+}
+p, .btn, button,input,li,label,a {
+    font-family: 'Jura', sans-serif;
+
+}
+
+
+a {
+    color: #98d9f5;
+
+    font-family: 'Jura', sans-serif;
+}
+
+a:hover {
+    color: #98d9f5;
+}
+
+hr {
+    background-color: #98d9f5;
+}
+
+p {
+    color: rgb(197,198,200);
+    font-family: 'Jura', sans-serif;
+}
+
+.signup-btn {
+    margin-top: 15px;
+}
+
+/*for navbar*/
+.navbar {
+    background-color: #032f41;
+    color: #98d9f5;
+    font-family: 'Jura', sans-serif;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 20px;
+    float: top;
+}
+
+.form-control {
+    font-family: 'Jura', sans-serif;
+    width: 100%;
+    padding: 6px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 20px;
+    float: top;
+}

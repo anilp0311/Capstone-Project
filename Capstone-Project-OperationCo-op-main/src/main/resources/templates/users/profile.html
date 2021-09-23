@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile page</title>
+    <link th:replace="partials/links :: links"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/profile.css}" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+</head>
+<body>
+<nav th:replace="partials/navbar :: navbar"></nav>
+<!--                    <h5><a th:href="@{'/users/delete/' + ${user.id}}">closed(delete)</a></h5>-->
+<div class="container">
+    <h2 class="h3 mb-3"><span th:text="${user.userName}"></span>'s Profile </h2>
+
+    <!--    removing names from profile -->
+    <!--    <span th:text="${user.userName}"></span>'s Profile-->
+    <h2 class="h3 mb-3"></h2>
+    <div class="row">
+        <!--Left Card Panel Containing User Info-->
+        <div class="col-md-4 col-xl-3">
+            <div class="card border-glow mb-3">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Profile Details</h5>
+                </div>
+                <!--Basic User Information Card-->
+                <div class="card-body text-center">
+                    <div class="row">
+                        <div class="col-10 offset-1">
+                            <div class="profileImg">
+                                <img class="imgP" th:src="${user.profilePic}"
+                                     style="width: 100%; height:100%; object-fit:cover"/>
+                            </div>
+                        </div>
+                    </div>
+                    <h4 class="card-title mb-0"><span th:text="${user.fullName}"></span></h4>
+                    <div class="text-muted mb-2"> @<span th:text="${user.userName}"></span></div>
+                    <div>
+                        <div class="row">
+                            <div class="col-6">
+                                <a class="btn btn-sm" th:href="@{'/users/edit/' + ${user.id}}">Edit
+                                    Profile</a>
+                            </div>
+                            <div class="col-6">
+                                <button id="profile-btn" class="pb btn btn-sm" type="button">Edit Image</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0">
+                <!--Bio Card-->
+                <div class="card-body">
+                    <h5 class="h6 card-title">About Me</h5>
+                    <p><span th:text="${user.bio}"></span></p>
+                </div>
+                <hr class="my-0">
+                <!--Social Media Card-->
+                <div class="card-body">
+                    <h5 class="h6 card-title">Socials</h5>
+                    <a th:if="${!#strings.isEmpty(user.twitchInfo)}" class="btn m-1" type="button">
+                        <i class="fab fa-twitch"></i>
+                        <span th:text="${user.twitchInfo}"></span>
+                    </a>
+                    <a th:if="${!#strings.isEmpty(user.discordInfo)}" class="btn m-1" type="button">
+                        <i class="fab fa-discord"></i>
+                        <span th:text="${user.discordInfo}"></span>
+                    </a>
+                    <a th:if="${!#strings.isEmpty(user.steamInfo)}" class="btn m-1" type="button">
+                        <i class="fab fa-steam"></i>
+                        <span th:text="${user.steamInfo}"></span>
+                    </a>
+                    <a th:if="${!#strings.isEmpty(user.xboxLiveInfo)}" class="btn m-1" type="button">
+                        <i class="fab fa-xbox"></i>
+                        <span th:text="${user.xboxLiveInfo}"></span>
+                    </a>
+                    <a th:if="${!#strings.isEmpty(user.psnInfo)}" class="btn m-1" type="button">
+                        <i class="fab fa-playstation"></i>
+                        <span th:text="${user.psnInfo}"></span>
+                    </a>
+
+                </div>
+                <hr class="my-0">
+                <!--Tag Card-->
+                <div class="card-body">
+                    <h5 class="h6 card-title">Tags</h5>
+                    <span class="pill" th:each="tag : ${user.getTags()}" th:id="${tag.name}"
+                          th:text="${tag.name}"></span>
+                </div>
+            </div>
+        </div>
+        <!-- Right Side Panel -->
+        <div class="col-md-8 col-xl-9">
+            <!-- Favorite Games Card -->
+            <div class="card border-glow">
+                <div class="card-body">
+                    <h5 class="card-title">Favorite Games</h5>
+                    <div id="favGames">
+                        <show_games th:if="${user.favorites}">
+                            <div class="d-flex flex-row flex-nowrap overflow-auto">
+                                <div th:each="game: ${user.favorites}">
+                                    <div class="card card-block mx-2">
+                                        <img th:src="${game.art_cover}"
+                                             style="height: 200px; width: 200px; object-fit: cover"/>
+                                        <h6 th:text="${game.title}"></h6>
+                                        <a th:href="@{'/users/userDelete/' + ${user.id} + '?UserId=' + ${game.id}}">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </show_games>
+                    </div>
+                </div>
+            </div>
+            <!-- Groups User Is In Card -->
+            <div class="card border-glow">
+                <div class="card-body">
+                    <h5 class="card-title">My Squads</h5>
+                    <show_groupIn th:if="${user.groups}">
+                        <div th:each="group: ${user.groups}">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-4 img-box">
+                                    <img th:src="${group.profilePic}"
+                                         style="height: 200px; width: 200px; object-fit: cover">
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+
+                                    <h5><a th:href="@{'/groups/profile/' + ${group.id}}" th:text="${group.name}"></a>
+                                    </h5>
+                                    <p th:text="${group.description}"></p>
+                                    <div th:if="${user.id == group.id}">
+
+                                        <a th:href="@{'/users/userLeave/' + ${user.id} + '?UserId=' + ${group.id}}">Leave
+                                            Group</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </show_groupIn>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------------------------Delete USER FEATURE??---------------------->
+    <!--    <div>-->
+    <!--        <h5><a th:href="@{'/users/delete/' + ${user.id}}">closed(delete)</a></h5>-->
+    <!--    </div>-->
+    <!---------------------------------------      Above this line                 ---------------------->
+    <!---------------------------------------User Ratings---------------------->
+    <!--        <div th:each="rating : ${user.ratings_received}">-->
+    <!--            <p th:text="${rating.rating}"></p>-->
+    <!--        </div>-->
+    <!---------------------------------------      Above this line                 ---------------------->
+
+</div>
+<script th:inline="javascript">const userId =/*[[${user.id}]]*/</script>
+<script th:inline="javascript">const url =/*[[@{/profile/pic}]]*/</script>
+<scripts th:replace="partials/scripts :: scripts"></scripts>
+<script src="//static.filestackapi.com/filestack-js/3.x.x/filestack.min.js"></script>
+<script th:src="@{/js/keys.js}"></script>
+<script th:src="@{/js/filestack.js}"></script>
+<script th:src="@{/js/userProfile.js}"></script>
+</body>
+</html>
